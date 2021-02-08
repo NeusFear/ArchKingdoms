@@ -1,0 +1,83 @@
+import net.fabricmc.loom.task.RemapJarTask
+
+plugins {
+	id 'java'
+	id 'maven-publish'
+	id 'idea'
+	id 'eclipse'
+	id 'fabric-loom' version '0.4-SNAPSHOT'
+	id 'com.github.johnrengelman.shadow' version '4.0.1'
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+archivesBaseName = project.archive_name
+version = project.mod_version
+group = project.maven_group
+
+def ENV = System.getenv()
+version = version + "+" + (ENV.BUILD_NUMBER ? ("build." + ENV.BUILD_NUMBER) : "custom")
+
+repositories {
+	mavenLocal()
+	maven {
+		url "http://maven.enginehub.org/repo/"
+	}
+}
+
+dependencies {
+
+	//Fabric stuff
+	minecraft "com.mojang:minecraft:${project.minecraft_version}"
+	mappings "net.fabricmc:yarn:${project.yarn_mappings}"
+	modCompile "net.fabricmc:fabric-loader:${project.loader_version}"
+	modCompile "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
+
+	//JDA stuff
+	compile ("net.dv8tion:JDA:${project.jda_version}") {
+		exclude module: "opus-java"
+	}
+}
+
+processResources {
+	inputs.property "version", project.version
+
+	from(sourceSets.main.resources.srcDirs) {
+		include "fabric.mod.json"
+		expand "version": project.version
+	}
+
+	from(sourceSets.main.resources.srcDirs) {
+		exclude "fabric.mod.json"
+	}
+}
+
+shadowJar {
+
+	configurations = [project.configurations.compile]
+
+	dependencies {
+		include(dependency('net.dv8tion:JDA'))
+		include(dependency('com.neovisionaries::.*'))
+		include(dependency('com.squareup.okio::.*'))
+		include(dependency('com.squareup.okhttp3::.*'))
+		include(dependency('org.apache.commons::.*'))
+		include(dependency('com.fasterxml.jackson.core::.*'))
+		include(dependency('net.sf.trove4j::.*'))
+		include(dependency('org.slf4j::.*'))
+	}
+
+	exclude '/mappings/*'
+}
+
+task remappedShadowJar(type: RemapJarTask) {
+	dependsOn tasks.shadowJar
+	input = tasks.shadowJar.archivePath
+	addNestedDependencies = true
+	archiveName = "pleodia-remapped.jar"
+}
+
+tasks.withType(JavaCompile) {
+	options.encoding = "UTF-8"
+}

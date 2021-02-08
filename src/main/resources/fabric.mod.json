@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "id": "kingdoms",
+  "version": "${version}",
+  "name": "Arch Kingdoms",
+  "description": "A Minecraft server for Oklahoma State University Architecture Students",
+  "authors": [
+    "Brandon Davis"
+  ],
+  "contact": {
+    "sources": "https://github.com/NeusFear/ArchKingdoms",
+    "issues": "https://github.com/NeusFear/ArchKingdoms/issues"
+  },
+  "license": "ARR",
+  "icon": "assets/kingdoms/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "com.brandonmdavis.kingdoms.Kingdoms"
+    ]
+  },
+  "depends": {
+    "fabricloader": ">=0.11.0",
+    "fabric": ">=0.29.0"
+  },
+  "mixins": [
+    "mixins.api.json"
+  ]
+}
