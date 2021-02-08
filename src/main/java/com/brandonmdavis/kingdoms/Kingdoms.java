@@ -117,12 +117,10 @@ public class Kingdoms implements ModInitializer {
 		backupScheduler.scheduleAtFixedRate(PlayerDataHandler::backupPlayerData, 5, 5, TimeUnit.MINUTES);
 
 		//Disable bot stuff for now until I get a new token
-		/*
 		Bot.startBot();
-		DiscordChatLink.sendStatusMessage(true, "Server Started.");
+		//DiscordChatLink.sendStatusMessage(true, "Server Started.");
 		if (FabricLoader.getInstance().isDevelopmentEnvironment()) {
-			DiscordChatLink.sendStatusMessage(true, "Server started in development Environment.");
+			//DiscordChatLink.sendStatusMessage(true, "Server started in development Environment.");
 		}
-		 */
 	}
 }

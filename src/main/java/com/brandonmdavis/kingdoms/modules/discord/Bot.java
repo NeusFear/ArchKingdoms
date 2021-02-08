@@ -10,17 +10,33 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.apache.logging.log4j.Level;
 
 import javax.security.auth.login.LoginException;
+import java.io.File;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Bot extends ListenerAdapter {
 
-    private static final String TOKEN = "MzQzMDU4MDU4MDg1NDAwNTc3.Xp4ucA.PP6oBRI3EvTP1c2SU3zVEEGeONk";
     private static final String LINK_CHANNEL = "569279826658197526";
     private static JDA jda;
 
     public static void startBot() {
+        String token = null;
+
+        try (Stream<String> stream = Files.lines( Paths.get("../token.txt"), StandardCharsets.UTF_8)) {
+            token = stream.collect(Collectors.joining());
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
         Kingdoms.log(Level.INFO, "Loading Discord Bot.");
         try {
-            jda = JDABuilder.createDefault(TOKEN)
+            jda = JDABuilder.createDefault(token)
                     .addEventListeners(new Bot())
                     .build();
             jda.awaitReady();
