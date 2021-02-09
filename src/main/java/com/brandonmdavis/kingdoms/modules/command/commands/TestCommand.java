@@ -1,25 +1,21 @@
 package com.brandonmdavis.kingdoms.modules.command.commands;
 
-import com.brandonmdavis.api.messages.ActionMessageComponent;
-import com.brandonmdavis.kingdoms.modules.messenger.Messenger;
-import com.mojang.brigadier.builder.LiteralArgumentBuilder;
-import com.mojang.brigadier.exceptions.CommandSyntaxException;
+import com.brandonmdavis.api.commands.Command;
 import com.brandonmdavis.api.commands.CommandResult;
+import com.brandonmdavis.api.messages.ActionMessageComponent;
 import com.brandonmdavis.api.messages.Colors;
 import com.brandonmdavis.api.messages.Message;
 import com.brandonmdavis.api.messages.MessageComponent;
-import net.fabricmc.fabric.api.registry.CommandRegistry;
+import com.brandonmdavis.kingdoms.modules.messenger.Messenger;
+import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import net.minecraft.network.packet.s2c.play.TitleS2CPacket;
 import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.command.ServerCommandSource;
 
-public class TestCommand {
-	public static void register() {
-		CommandRegistry.INSTANCE.register(false, dispatcher -> {
-			LiteralArgumentBuilder<ServerCommandSource> builder = CommandManager.literal("testcommand")
-					.executes(context -> execute(context.getSource()));
-			dispatcher.register(builder);
-		});
+public class TestCommand extends Command {
+
+	public TestCommand() {
+		super(CommandManager.literal("testcommand").executes(context -> execute(context.getSource())));
 	}
 
 	private static int execute(ServerCommandSource source) {

@@ -9,12 +9,18 @@ public class Rank {
 	public static final String PREFIX_PREFIX = "[";
 	public static final String PREFIX_SUFFIX = "]";
 
+	private Rank childRank;
+
 	private String name;
 	private int permissionLevel;
 	private Message.Builder prefix;
 	private String description;
 
 	public Rank(String name, int permissionLevel, String description, String color, String bracketColor) {
+		this(name, permissionLevel, description, color, bracketColor, null);
+	}
+
+	public Rank(String name, int permissionLevel, String description, String color, String bracketColor, Rank childRank) {
 		this.name = name;
 		this.permissionLevel = permissionLevel;
 		this.description = description;
@@ -25,6 +31,14 @@ public class Rank {
 						.hoverEvent(ActionMessageComponent.Hover.TOOLTIP, description)
 						.build())
 				.addComponent(MessageComponent.builder().text(PREFIX_SUFFIX).color(bracketColor).build());
+	}
+
+	public boolean hasChildRank() {
+		return childRank != null;
+	}
+
+	public Rank getChildRank() {
+		return childRank;
 	}
 
 	public String getName() {

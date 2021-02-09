@@ -1,51 +1,34 @@
 package com.brandonmdavis.kingdoms.modules.data.serverdata;
 
-import com.brandonmdavis.kingdoms.modules.warps.Warp;
+import com.brandonmdavis.kingdoms.modules.kingdom.KingdomHome;
+import com.brandonmdavis.kingdoms.modules.permissions.Rank;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 
 public class ServerData {
 
-	private ArrayList<Warp> warps = new ArrayList<>();
+	private HashMap<Rank, KingdomHome> homes = new HashMap<>();
 
 	public ServerData() {
 
 	}
 
-	public ServerData(ArrayList<Warp> warps) {
-		this.warps = warps;
+	public ServerData(HashMap<Rank, KingdomHome> homes) {
+		this.homes = homes;
 	}
 
-	public ArrayList<Warp> getWarps() {
-		return warps;
+	public void setHome(Rank rank, KingdomHome home) {
+		homes.get(rank).update(home);
 	}
 
-	public boolean addWarp(Warp warp) {
-		for (Warp warpLoop : warps) {
-			if (warpLoop.getName().equalsIgnoreCase(warp.getName())) {
-				return false;
+	public KingdomHome getWarp(Rank rank) {
+		if (homes.containsKey(rank)) {
+			return homes.get(rank);
+		} else {
+			if (rank.hasChildRank() && homes.containsKey(rank.getChildRank())) {
+				return homes.get(rank.getChildRank());
 			}
+			return null;
 		}
-		warps.add(warp);
-		return false;
-	}
-
-	public boolean removeWarp(String name) {
-		for (Warp warp : warps) {
-			if (warp.getName().equalsIgnoreCase(name)) {
-				warps.remove(warp);
-				return true;
-			}
-		}
-		return false;
-	}
-
-	public Warp getWarp(String name) {
-		for (Warp warp : warps) {
-			if (warp.getName().equalsIgnoreCase(name)) {
-				return warp;
-			}
-		}
-		return null;
 	}
 }

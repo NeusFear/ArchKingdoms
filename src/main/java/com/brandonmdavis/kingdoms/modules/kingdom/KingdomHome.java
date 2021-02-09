@@ -1,16 +1,14 @@
-package com.brandonmdavis.kingdoms.modules.warps;
+package com.brandonmdavis.kingdoms.modules.kingdom;
 
-public class Warp {
+public class KingdomHome {
 
-	private String name;
 	private double x;
 	private double y;
 	private double z;
 	private float pitch;
 	private float yaw;
 
-	public Warp(String name, double x, double y, double z, float pitch, float yaw) {
-		this.name = name;
+	public KingdomHome(double x, double y, double z, float pitch, float yaw) {
 		this.x = x;
 		this.y = y;
 		this.z = z;
@@ -18,8 +16,12 @@ public class Warp {
 		this.yaw = yaw;
 	}
 
-	public String getName() {
-		return name;
+	public void update(KingdomHome home) {
+		this.x = home.x;
+		this.y = home.y;
+		this.z = home.z;
+		this.pitch = home.pitch;
+		this.yaw = home.yaw;
 	}
 
 	public double getX() {

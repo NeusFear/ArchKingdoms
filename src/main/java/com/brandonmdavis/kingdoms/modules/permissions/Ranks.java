@@ -39,9 +39,9 @@ public class Ranks {
 		BARON = new Rank("baron", 1, "Has declared loyalty to the Baron Leader.", Colors.LIME, Colors.WHITE);
 		PUNK = new Rank("punk", 1, "Has declared loyalty to the Punk Leader.", Colors.LIGHT_BLUE, Colors.WHITE);
 		BELLUM = new Rank("bellum", 1, "Has declared loyalty to the Bellum Leader.", Colors.CYAN, Colors.WHITE);
-		BARON_LEADER = new Rank("baron_leader", 2, "Leads the Baron Kingdom.", Colors.LIME, Colors.GOLD);
-		PUNK_LEADER = new Rank("punk_leader", 2, "Leads the Punk Kingdom.", Colors.LIGHT_BLUE, Colors.GOLD);
-		BELLUM_LEADER = new Rank("bellum_leader", 2, "Leads the Bellum Kingdom.", Colors.CYAN, Colors.GOLD);
+		BARON_LEADER = new Rank("baron_leader", 2, "Leads the Baron Kingdom.", Colors.LIME, Colors.GOLD, BARON);
+		PUNK_LEADER = new Rank("punk_leader", 2, "Leads the Punk Kingdom.", Colors.LIGHT_BLUE, Colors.GOLD, PUNK);
+		BELLUM_LEADER = new Rank("bellum_leader", 2, "Leads the Bellum Kingdom.", Colors.CYAN, Colors.GOLD, BELLUM);
 		DEITY_OF_DESIGN = new Rank("deity_of_design", 3, "The default rank of any new player.", Colors.GOLD, Colors.DARK_GRAY);
 	}
 
