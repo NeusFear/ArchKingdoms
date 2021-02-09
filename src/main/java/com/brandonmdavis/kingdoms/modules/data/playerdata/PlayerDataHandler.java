@@ -37,7 +37,7 @@ public class PlayerDataHandler {
 		playerData.setUuid(uuid);
 		playerData.addUsername(username);
 		playerData.setIndex(playerDataStorage.size());
-		playerData.setRankId(Ranks.GUEST.getName());
+		playerData.setRankId(Ranks.WANDERER.getName());
 		playerData.setFirstJoin(Time.getNow().toString());
 		playerData.setSeen(Time.getNow().toString());
 		playerData.setOnTime(0);

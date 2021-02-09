@@ -31,7 +31,7 @@ public class DeleteWarpCommand {
 		ServerPlayerEntity player = SourceUtil.getPlayerFromSource(context.getSource());
 
 		//TODO MAKE THIS NICER
-		if (Ranks.getRank(PlayerDataHandler.getPlayerDataHandler().getPlayerData(player.getUuidAsString()).getRankId()).getPermissionLevel() < Ranks.ADMINISTRATOR.getPermissionLevel()) {
+		if (Ranks.getRank(PlayerDataHandler.getPlayerDataHandler().getPlayerData(player.getUuidAsString()).getRankId()).getPermissionLevel() < Ranks.DEITY_OF_DESIGN.getPermissionLevel()) {
 			Messenger.error(context.getSource(), Message.builder().addComponent(MessageComponent.builder().text("You dont have permission to delete warps.").build()).build());
 			return CommandResult.SUCCESS;
 		}
